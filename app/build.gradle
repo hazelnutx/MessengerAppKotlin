@@ -38,4 +38,6 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth:19.3.0'
+    // Firebase Storage
+    implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
 }
