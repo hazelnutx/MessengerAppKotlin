@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MessengerApp</string>
+    <string name="usernamePH">Username</string>
+    <string name="emailPH">Email</string>
+    <string name="passwordPH">Password</string>
+    <string name="registerTextButton">Register</string>
+    <string name="haveAnAccountAlready">Already have an account?</string>
+    <string name="loginTextButton">Login</string>
+</resources>
