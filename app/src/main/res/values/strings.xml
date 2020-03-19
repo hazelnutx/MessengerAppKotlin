@@ -6,4 +6,6 @@
     <string name="registerTextButton">Register</string>
     <string name="haveAnAccountAlready">Already have an account?</string>
     <string name="loginTextButton">Login</string>
+    <string name="backToRegisterText">Don\'t have an account?</string>
+    <string name="photoSelect">Select Photo</string>
 </resources>

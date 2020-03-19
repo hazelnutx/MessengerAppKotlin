@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "82143776587",
+    "firebase_url": "https://messengerappkotlin-feeac.firebaseio.com",
+    "project_id": "messengerappkotlin-feeac",
+    "storage_bucket": "messengerappkotlin-feeac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82143776587:android:9c68ade95d7df1262262ce",
+        "android_client_info": {
+          "package_name": "com.example.messengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82143776587-89sps5d2gqk6ntgp41m8uikn3426eqp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgp4o1FbHvr8IuJnxSICK9Npz4YpwU8hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82143776587-89sps5d2gqk6ntgp41m8uikn3426eqp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
