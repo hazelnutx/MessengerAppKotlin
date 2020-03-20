@@ -41,5 +41,5 @@ dependencies {
     // Firebase Storage
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
     // Firebase DataBase
-    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-database-ktx:19.2.1'
 }

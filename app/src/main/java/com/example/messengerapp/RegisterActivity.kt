@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
@@ -116,7 +117,32 @@ class RegisterActivity : AppCompatActivity() {
             // Getting access to the download location of the photo
             ref.downloadUrl.addOnSuccessListener {
                 Log.d("RegisterActivity", "Photo download url: $it")
+
+                saveUserToFirebaseDatabase(it.toString())
+            }.addOnFailureListener {
+                Log.w("RegisterActivity", "Couldn't download the url")
             }
+        }.addOnFailureListener {
+            Log.w("RegisterActivity", "Couldn't upload the photo")
         }
     }
+
+    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+
+        val uid = FirebaseAuth.getInstance().uid ?: "" // elvis operator to default it if null to empty string.
+        val db = FirebaseDatabase.getInstance()
+        val ref = db.getReference("/users/${uid}")
+
+        val user = User(uid, username_edittext_register.text.toString(), profileImageUrl)
+        ref.setValue(user).addOnSuccessListener {
+            Log.d("RegisterActivity", "We saved the user to firebase db $uid and user $user")
+        }.addOnFailureListener {
+            Log.w("RegisterActivity", "Problem saving the user to the FB DB")
+        }
+    }
+}
+
+
+class User(val uid: String ,val username: String, val profileImageUrl: String) {
+
 }
