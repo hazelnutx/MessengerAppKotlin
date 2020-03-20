@@ -2,9 +2,8 @@ package com.example.messengerapp
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,8 +12,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -48,6 +47,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private var selectedPhotoUri: Uri? = null
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -57,12 +58,10 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("RegisterActivity", "This is the image")
 
             // this return a URI, that represents the location of where that image is stored in the device
-            val uri = data.data
-            Log.d("RegisterActivity", "Print URI: $uri")
+            selectedPhotoUri = data.data
+            Log.d("RegisterActivity", "Print URI: $selectedPhotoUri")
             // with bitmap we have access to the bitmap of the photo that is selected.
-//            val source = ImageDecoder.createSource(contentResolver, uri!!)
-//            val bitmap = ImageDecoder.decodeDrawable(source)
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             val bitmapDrawable = BitmapDrawable(bitmap)
             Log.d("RegisterActivity", "Print bitmap/source: $bitmap")
             photoSelector.background = bitmapDrawable
@@ -91,7 +90,7 @@ class RegisterActivity : AppCompatActivity() {
             if (it.isSuccessful) {
                 Log.d("Auth", "createUserWithEmail: success")
                 val user = auth.currentUser
-
+                uploadImageToFirebaseStorage()
             } else {
                 Log.w("Auth", "createUserWithEmail: failed", it.exception)
                 Toast.makeText(baseContext, "Auth failed", Toast.LENGTH_SHORT).show()
@@ -99,5 +98,10 @@ class RegisterActivity : AppCompatActivity() {
         }.addOnFailureListener {
             Log.d("Auth", "Failed to create user: ${it.message}")
         }
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+        val storage = FirebaseStorage.getInstance()
+
     }
 }
