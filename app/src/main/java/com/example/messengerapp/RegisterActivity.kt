@@ -64,9 +64,13 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("RegisterActivity", "Print URI: $selectedPhotoUri")
             // with bitmap we have access to the bitmap of the photo that is selected.
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            Log.d("RegisterActivity", "Print bitmap/source: $bitmap")
-            photoSelector.background = bitmapDrawable
+
+            select_photo_image_view_register.setImageBitmap(bitmap)
+            photoSelector.alpha = 0f // we hide the button once we have the image
+
+//            val bitmapDrawable = BitmapDrawable(bitmap)
+//            Log.d("RegisterActivity", "Print bitmap/source: $bitmap")
+//            photoSelector.background = bitmapDrawable
 
         } else {
             Log.w("RegisterActivity", "Failed to load")
