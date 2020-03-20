@@ -12,7 +12,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -101,7 +103,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebaseStorage() {
-        val storage = FirebaseStorage.getInstance()
+        val storage = Firebase.storage("gs://messengerappkotlin-feeac.appspot.com/images")
 
     }
 }
