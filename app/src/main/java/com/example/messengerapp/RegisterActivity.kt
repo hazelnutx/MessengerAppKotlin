@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -82,28 +83,40 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        Log.d("Register", "This is the mail: $email")
-        Log.d("Register", "This is the pw: $password")
+        Log.d("RegisterActivity", "This is the mail: $email")
+        Log.d("RegisterActivity", "This is the pw: $password")
 
         // Firebase auth
         val auth = FirebaseAuth.getInstance()
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
-                Log.d("Auth", "createUserWithEmail: success")
+                Log.d("RegisterActivity", "createUserWithEmail: success")
                 val user = auth.currentUser
                 uploadImageToFirebaseStorage()
             } else {
-                Log.w("Auth", "createUserWithEmail: failed", it.exception)
+                Log.w("RegisterActivity", "createUserWithEmail: failed", it.exception)
                 Toast.makeText(baseContext, "Auth failed", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener {
-            Log.d("Auth", "Failed to create user: ${it.message}")
+            Log.d("RegisterActivity", "Failed to create user: ${it.message}")
         }
     }
 
     private fun uploadImageToFirebaseStorage() {
-        val storage = Firebase.storage("gs://messengerappkotlin-feeac.appspot.com/images")
+        if (selectedPhotoUri == null) return
 
+        val filename = UUID.randomUUID().toString()
+        val storage = FirebaseStorage.getInstance()
+        val ref = storage.getReference("images/$filename")
+
+        ref.putFile(selectedPhotoUri!!).addOnSuccessListener {
+            Log.d("RegisterActivity", "Upload the photo: ${it.metadata?.path}")
+
+            // Getting access to the download location of the photo
+            ref.downloadUrl.addOnSuccessListener {
+                Log.d("RegisterActivity", "Photo download url: $it")
+            }
+        }
     }
 }
