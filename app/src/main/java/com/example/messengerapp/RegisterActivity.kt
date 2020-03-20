@@ -13,10 +13,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 
@@ -24,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_register)
 
         register_button_register.setOnClickListener {
             performRegister()
@@ -97,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
                 uploadImageToFirebaseStorage()
             } else {
                 Log.w("RegisterActivity", "createUserWithEmail: failed", it.exception)
-                Toast.makeText(baseContext, "Auth failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "The email address is already in use!", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener {
             Log.d("RegisterActivity", "Failed to create user: ${it.message}")
