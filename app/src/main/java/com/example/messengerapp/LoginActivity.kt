@@ -1,5 +1,6 @@
 package com.example.messengerapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -36,10 +37,15 @@ class LoginActivity : AppCompatActivity() {
 
         // Firebase Auth.
         val auth = FirebaseAuth.getInstance()
+        // Firebase DB
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 val user = auth.currentUser
                 Log.d("Login", "logInWithEmail: success with ${user!!.uid}")
+
+                val intent = Intent(this, UserActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
 
             } else {
                 Log.w("Login", "logInWithEmail: failed", it.exception)
@@ -50,5 +56,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun getData() {
+        val intent = Intent(this, UserActivity()::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
 
 }

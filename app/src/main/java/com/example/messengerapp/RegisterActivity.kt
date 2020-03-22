@@ -138,6 +138,11 @@ class RegisterActivity : AppCompatActivity() {
         val user = User(uid, username_edittext_register.text.toString(), profileImageUrl)
         ref.setValue(user).addOnSuccessListener {
             Log.d("RegisterActivity", "We saved the user to firebase db $uid and user $user")
+
+            val intent = Intent(this, UserActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+
         }.addOnFailureListener {
             Log.w("RegisterActivity", "Problem saving the user to the FB DB")
         }
@@ -145,6 +150,4 @@ class RegisterActivity : AppCompatActivity() {
 }
 
 
-class User(val uid: String ,val username: String, val profileImageUrl: String) {
-
-}
+class User(val uid: String ,val username: String, val profileImageUrl: String) {}
