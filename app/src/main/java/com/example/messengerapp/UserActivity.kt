@@ -13,6 +13,8 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main_user.*
 
 class UserActivity: AppCompatActivity() {
+    private var array = ArrayList<Any>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_user)
@@ -37,6 +39,7 @@ class UserActivity: AppCompatActivity() {
     }
 
     private fun getUserData() {
+
         val db = FirebaseDatabase.getInstance()
         val ref = db.getReference("users/$uid")
         ref.addValueEventListener(object: ValueEventListener {
@@ -46,9 +49,8 @@ class UserActivity: AppCompatActivity() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val username = dataSnapshot.child("username").getValue()
-                val profileImageUrl = dataSnapshot.child("profileImageUrl").getValue()
-                Log.d("User", "Username: $username, Profile Image: $profileImageUrl")
-                username_textview_user.text = username.toString()
+//                val profileImageUrl = dataSnapshot.child("profileImageUrl").getValue()
+                Log.d("User", "Username: $username")
             }
 
         })
