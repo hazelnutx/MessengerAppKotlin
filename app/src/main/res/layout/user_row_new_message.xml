@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
 
     <TextView
         android:id="@+id/username_textview_new_message"
@@ -13,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/profile_image_image_view_new_message"
@@ -27,6 +28,8 @@
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
