@@ -15,6 +15,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_new_message.*
+import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class NewMessageActivity : AppCompatActivity() {
 
@@ -23,14 +24,6 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         supportActionBar?.title = "Select User"
-
-        val adapter = GroupAdapter<GroupieViewHolder>()
-
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-
-        recycler_view_new_message.adapter = adapter
 
         fetchUsers()
     }
@@ -48,7 +41,10 @@ class NewMessageActivity : AppCompatActivity() {
                 dataSnapshot.children.forEach {
                     Log.d("NewMessage", it.toString())
                     val user = it.getValue(User::class.java) // the user from RegisterActivity aka BluePrint
-                    adapter.add(UserItem())
+                    if (user != null) {
+                        adapter.add(UserItem(user))
+                    }
+
                 }
                 recycler_view_new_message.adapter = adapter
             }
@@ -56,9 +52,10 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem: Item<GroupieViewHolder>() {
+class UserItem(val user: User): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+        viewHolder.itemView.username_textview_new_message.text = user.username
+        
     }
 
     override fun getLayout(): Int {

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/username_textview_new_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -16,13 +16,13 @@
         android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image_image_view_new_message"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/profile_image_image_view_new_message"
+        app:layout_constraintTop_toTopOf="@+id/profile_image_image_view_new_message" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profile_image_image_view_new_message"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
