@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+
         Log.d("Login", "Logged in with: $email, $password")
 
         // Firebase Auth.
@@ -43,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                 val user = auth.currentUser
                 Log.d("Login", "logInWithEmail: success with ${user!!.uid}")
 
-                val intent = Intent(this, UserActivity::class.java)
+                val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
 
@@ -55,11 +56,4 @@ class LoginActivity : AppCompatActivity() {
             Log.d("Login", "Failed to login: ${it.message}")
         }
     }
-
-    private fun getData() {
-        val intent = Intent(this, UserActivity()::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-    }
-
 }
